@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'cuongngo.selenium'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.testng/testng
+    compile group: 'org.testng', name: 'testng', version: '7.4.0'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.0.0'
+    implementation "io.github.bonigarcia:webdrivermanager:4.3.1"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
+}
