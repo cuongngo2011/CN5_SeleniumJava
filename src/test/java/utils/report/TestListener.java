@@ -14,7 +14,7 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         ExtentTestManager.addIntoExtentReport(result, false, Status.FAIL);
 
-        String screenshotsFolder = "TestReport/screenshots";
+        String screenshotsFolder = "output/screenshots";
         String fileNameScreenShot = System.getProperty("extentReportFileName") + "-" + System.currentTimeMillis();
         new File(screenshotsFolder).mkdirs();
         DriverManagerFactory.captureScreenshot(fileNameScreenShot, screenshotsFolder);

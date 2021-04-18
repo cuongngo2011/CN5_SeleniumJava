@@ -13,7 +13,7 @@ public class ExtentManager {
     private static String fileNameWithoutExtension = "Test-Report-" + generateTimeStampString();
     private static String reportFileName = fileNameWithoutExtension + ".html";
     private static String fileSeperator = "\\";
-    private static String reportFilepath = System.getProperty("user.dir") + fileSeperator + "TestReport" + fileSeperator + System.getProperty("appName").toLowerCase() + "." + System.getProperty("suite").toLowerCase() + fileSeperator;
+    private static String reportFilepath = System.getProperty("user.dir") + fileSeperator + "output" + fileSeperator + System.getProperty("appName").toLowerCase() + "." + System.getProperty("suite").toLowerCase() + fileSeperator;
     private static String reportFileLocation = reportFilepath + reportFileName;
 
     public static ExtentReports getInstance() {
@@ -48,7 +48,7 @@ public class ExtentManager {
     private static String getReportPath(String path) {
         File testDirectory = new File(path);
         if (!testDirectory.exists()) {
-            if (testDirectory.mkdir()) {
+            if (testDirectory.mkdirs()) {
                 System.out.println("Directory: " + path + " is created!");
                 return reportFileLocation;
             } else {

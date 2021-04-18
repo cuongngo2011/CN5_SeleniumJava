@@ -18,7 +18,7 @@ public class TestBase {
         ExtentTestManager.createNode("Pre-Condition");
 
         DriverManagerFactory.createDriver(Constants.BROWSER.get(browser), Constants.RUN_MODE.get(runmode));
-        DriverManagerFactory.getDriver().get(Constants.URL.RAILWAYS);
+        DriverManagerFactory.navigate(Constants.URL.RAILWAYS);
     }
 
     @AfterClass(alwaysRun = true)

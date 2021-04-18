@@ -7,8 +7,14 @@
     <test name="Regression">
         <parameter name="browser" value="chrome" />
         <parameter name="runmode" value="local" />
+
+        <!--<packages>-->
+            <!--<package name="test.railway.testcase">-->
+            <!--</package>-->
+        <!--</packages>-->
+
         <classes>
-            <class name="test.railway.testcase.TC0001" />
+            <class name="test.railway.testcase.Reg_01" />
         </classes>
     </test>
 </suite>

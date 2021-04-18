@@ -7,7 +7,7 @@ public class Constants {
 
     public static class URL {
         public static String SAUCELABS = "";
-        public static String RAILWAYS = "";
+        public static String RAILWAYS = "http://railwayqa.somee.com/Page/HomePage.cshtml";
     }
 
     public static class WAIT_TIME {

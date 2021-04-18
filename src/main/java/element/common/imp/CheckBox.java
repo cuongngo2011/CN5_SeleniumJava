@@ -1,6 +1,7 @@
 package element.common.imp;
 
-import driver.DriverUtils;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
+import common.Constants;
 import element.base.imp.Editable;
 import element.common.ICheckBox;
 import org.openqa.selenium.By;
@@ -68,7 +69,7 @@ public class CheckBox extends Editable implements ICheckBox {
         List<WebElement> elements = getElements();
         for (int i = 0; i < elements.size(); i++) {
             WebElement element = elements.get(i);
-            WebDriverWait wait = new WebDriverWait(getDriver(), DriverUtils.getTimeOut());
+            WebDriverWait wait = new WebDriverWait(getDriver(), Constants.WAIT_TIME.SHORT);
             wait.until(ExpectedConditions.elementToBeSelected(element));
         }
     }

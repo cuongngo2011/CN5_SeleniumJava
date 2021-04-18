@@ -42,4 +42,12 @@ public class DriverManagerFactory {
         driverManager.createDriver(browser, mode);
         drivers.set(driverManager);
     }
+
+    public static void acceptAlert() {
+        getDriver().switchTo().alert().accept();
+    }
+
+    public static void navigate(String url) {
+        getDriver().get(url);
+    }
 }

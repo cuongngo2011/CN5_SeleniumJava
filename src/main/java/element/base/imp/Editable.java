@@ -1,6 +1,5 @@
 package element.base.imp;
 
-import driver.DriverUtils;
 import element.base.IEditable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +23,7 @@ public class Editable extends Clickable implements IEditable {
 
 	@Override
 	public void setText(String value) {
-		
+		getElement().sendKeys(value);
 	}
 
 	@Override
@@ -46,8 +45,12 @@ public class Editable extends Clickable implements IEditable {
         String[] parts = string.split("(?!^)");
         for (int i = 0; i < parts.length; i++) {
             getElement().sendKeys(parts[i]);
-            DriverUtils.delay(0.1);
-        }
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
     }
 	
 	public void sendKeyboard(CharSequence... value){

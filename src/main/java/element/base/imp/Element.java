@@ -1,6 +1,7 @@
 package element.base.imp;
 
-import driver.DriverUtils;
+import common.Constants;
+import driver.DriverManagerFactory;
 import element.base.IElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +40,7 @@ public class Element implements IElement {
     }
 
     protected WebDriver getDriver() {
-        return DriverUtils.getDriver();
+        return DriverManagerFactory.getDriver();
     }
 
     protected JavascriptExecutor jsExecutor() {
@@ -92,9 +93,6 @@ public class Element implements IElement {
 
     @Override
     public WebElement getElement() {
-        if (DriverUtils.isWaitForAjax()) {
-            DriverUtils.waitForAjaxJQueryProcess();
-        }
         return getDriver().findElement(getLocator());
     }
 
@@ -113,9 +111,6 @@ public class Element implements IElement {
 
     @Override
     public List<WebElement> getElements() {
-        if (DriverUtils.isWaitForAjax()) {
-            DriverUtils.waitForAjaxJQueryProcess();
-        }
         return getDriver().findElements(getLocator());
     }
 
@@ -218,15 +213,12 @@ public class Element implements IElement {
 
     @Override
     public void waitForDisplay() {
-        waitForDisplay(DriverUtils.getTimeOut());
+        waitForDisplay(Constants.WAIT_TIME.SHORT);
     }
 
     @Override
     public void waitForDisplay(int timeOutInSeconds) {
         try {
-            if (DriverUtils.isWaitForAjax()) {
-                DriverUtils.waitForAjaxJQueryProcess();
-            }
             logger.info(String.format("Wait for control display %s", getLocator().toString()));
             WebDriverWait wait = new WebDriverWait(getDriver(), timeOutInSeconds);
             wait.until(ExpectedConditions.presenceOfElementLocated(getLocator()));
@@ -339,7 +331,7 @@ public class Element implements IElement {
 
     @Override
     public void waitForElementEnabled() {
-        waitForElementEnabled(DriverUtils.getTimeOut());
+        waitForElementEnabled(Constants.WAIT_TIME.SHORT);
     }
 
     @Override
@@ -361,12 +353,12 @@ public class Element implements IElement {
 
     @Override
     public void waitForElementDisabled() {
-        waitForElementDisabled(DriverUtils.getTimeOut());
+        waitForElementDisabled(Constants.WAIT_TIME.SHORT);
     }
 
     @Override
     public void waitForPresent() {
-        waitForPresent(DriverUtils.getTimeOut());
+        waitForPresent(Constants.WAIT_TIME.SHORT);
     }
 
     @Override
@@ -383,27 +375,6 @@ public class Element implements IElement {
         } catch (Exception e) {
             logger.error(String.format("waitForPresent: Has error with control '%s': %s", getLocator().toString(),
                     e.getMessage()));
-        }
-    }
-
-    @Override
-    public void waitForAngularLoad(int timeOutInSecond) {
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), timeOutInSecond);
-            wait.until(new Function<WebDriver, Boolean>() {
-                @Override
-                public Boolean apply(WebDriver driver) {
-                    JavascriptExecutor executor = (JavascriptExecutor) driver;
-                    Boolean angularIsComplete = (Boolean) (executor.executeScript(
-                            "return angular.element(document).injector().get('$http').pendingRequests.length === 0"));
-                    return angularIsComplete;
-                }
-            });
-            DriverUtils.delay(1);
-
-        } catch (Exception e) {
-            DriverUtils.delay(1);
-            logger.error("waitForAngularLoad: An error occurred when waitForAngularLoad" + e.getMessage());
         }
     }
 

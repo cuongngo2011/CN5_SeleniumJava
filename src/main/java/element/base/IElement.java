@@ -64,8 +64,6 @@ public interface IElement {
 	void waitForPresent();
 
 	void waitForPresent(int timeOutInSecond);
-	
-	void waitForAngularLoad(int timeOutInSecond);
 
 	void moveTo();
 

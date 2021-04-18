@@ -58,7 +58,6 @@ public class ComboBox extends Clickable implements IComboBox {
 	public void selectMultiOptionDropdown(String... options) {
 		WebElement dropdown = getElement();
 		dropdown.click();
-		waitForAngularLoad(10);
 		List<WebElement> itemList = dropdown.findElements(By.xpath("ul/li/a/span"));
 		List<WebElement> itemList2 = dropdown.findElements(By.xpath("ul/li/a"));
 
@@ -67,7 +66,6 @@ public class ComboBox extends Clickable implements IComboBox {
 				itemList2.get(i).click();
 			}
 		}
-		waitForAngularLoad(10);
 		for (WebElement li : itemList2) {
 			for (int i = 0; i < options.length; i++) {
 				if (li.getText().trim().replace("&nbsp;", "").equals(options[i])) {
