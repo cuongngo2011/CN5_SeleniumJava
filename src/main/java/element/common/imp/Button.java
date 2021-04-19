@@ -17,6 +17,4 @@ public class Button extends Clickable implements IButton {
     public Button(String locator, Object... value) {
         super(locator, value);
     }
-
-    private Button loginButton = new Button("//xpth");
 }

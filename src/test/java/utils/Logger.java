@@ -1,7 +1,10 @@
 package utils;
 
+import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Reporter;
+import utils.report.ExtentManager;
+import utils.report.ExtentTestManager;
 
 public class Logger {
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(Logger.class);
@@ -9,20 +12,21 @@ public class Logger {
     public static void info(String message) {
         Reporter.log("<b>INFO: </b>" + message);
         log.info(String.format("Thread #%s: %s", Thread.currentThread().getId(), message));
+        System.out.println(message);
 
-//        // Extent Report
-//        if (ExtentManager.extent != null)
-//            if (ExtentTestManager.getNode() != null)
-//                ExtentTestManager.getNode().log(Status.INFO, message);
+        // Extent Report
+        if (ExtentManager.extent != null)
+            if (ExtentTestManager.getNode() != null)
+                ExtentTestManager.getNode().log(Status.INFO, message);
     }
 
     public static void error(String message, Exception exception) {
         Reporter.log("<b>ERROR: </b>" + message);
         log.error(String.format("Thread #%s: %s", Thread.currentThread().getId(), message), exception);
 
-//        // Extent Report
-//        if (ExtentManager.extent != null)
-//            if (ExtentTestManager.getNode() != null)
-//                ExtentTestManager.getNode().log(Status.ERROR, message + " Exception: " + exception.toString());
+        // Extent Report
+        if (ExtentManager.extent != null)
+            if (ExtentTestManager.getNode() != null)
+                ExtentTestManager.getNode().log(Status.ERROR, message + " Exception: " + exception.toString());
     }
 }
